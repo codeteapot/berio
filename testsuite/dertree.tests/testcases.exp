@@ -1,0 +1,10 @@
+set timeout 3
+
+set test_casesdir "$srcdir/dertree.tests/testcases"
+
+dertree empty              "Empty"
+dertree incomplete         "Incomplete"
+dertree eoc                "EOC"
+dertree context-specific   "Context specific"
+dertree object-identifier  "Object identifier"
+dertree gnu-cert           "GNU certificate"
