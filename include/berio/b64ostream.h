@@ -22,6 +22,10 @@ class b64_basic_ostream_target : public b64_output::target {
   bool put(char c) {
     return __line_separator() and __os.put(__os.widen(c)).good();
   }
+  
+  void flush() {
+    __os.flush();
+  }
 
   private:
 

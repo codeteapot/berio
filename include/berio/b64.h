@@ -48,13 +48,15 @@ class b64_output : public octet_output {
     public:
     
     virtual bool put(char c) = 0;
+    
+    virtual void flush() = 0;
   };
 
   b64_output(target& tgt) noexcept;
 
   std::size_t put(unsigned char const* optr, std::size_t len);
   
-  void conclude();
+  void flush();
 
   private:
   

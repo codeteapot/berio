@@ -1,0 +1,2 @@
+* Error testing only when decoding
+* Bi-directional buffered octet output

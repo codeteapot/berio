@@ -134,8 +134,9 @@ size_t b64_output::put(unsigned char const* optr, size_t len) {
   return actual_len;
 }
 
-void b64_output::conclude() {
+void b64_output::flush() {
   (this->*__conclude_fn)();
+  __tgt.flush();
 }
 
 void b64_output::__to_first() {

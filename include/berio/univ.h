@@ -2,6 +2,7 @@
 #define BERIO_UNIV_H
 
 #include <berio/io.h>
+#include <berio/tag.h>
 
 namespace ber {
 namespace univ {

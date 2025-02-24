@@ -1,0 +1,15 @@
+set timeout 3
+
+if { $verbose > 1 } {
+  send_user "Cheking constructed indefinite...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+expect {
+  "+ PRIVATE 1 *"         { exp_continue }
+  "+- PRIVATE 1 <01 02>"  { exp_continue }
+  "+- PRIVATE 1 <03 04>"  { pass "pass\n" }
+  timeout { fail "timeout\n"}
+  eof { fail "eof\n" }
+}
