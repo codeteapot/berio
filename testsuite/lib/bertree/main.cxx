@@ -1,12 +1,11 @@
-#include <algorithm>
 #include <cstring>
 #include <iostream>
 
 #include <berio/b64istream.h>
 #include <berio/b64ostream.h>
 
-#include "derscan.h"
-#include "derprint.h"
+#include "berscan.h"
+#include "berprint.h"
 
 using namespace std;
 using namespace ber;
@@ -16,17 +15,11 @@ char const* basename_get(char*);
 
 int main(int argc, char* argv[]) {
   if (arg_exist(argc, argv, "-s")) {
-    b64_istream_source b64_cin_src(cin);
-    b64_input b64_cin(b64_cin_src);
-    delimited_input delim_b64_cin(b64_cin);
-    der_scan(delim_b64_cin, cout, 0);
+    ber_scan(b64_input(cin), cout);
     return EXIT_SUCCESS;
   }
   if (arg_exist(argc, argv, "-p")) {
-    b64_ostream_target b64_cout_tgt(cout);
-    b64_output b64_cout(b64_cout_tgt);
-    der_print(b64_cout, cin, 0);
-    b64_cout.conclude();
+    ber_print(b64_output(cout), cin);
     return EXIT_SUCCESS;
   }
   cout << "Usage: " << basename_get(argv[0]) << " (-s|-p)" << endl;

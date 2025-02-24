@@ -39,13 +39,17 @@ size_t buffered_output::put(unsigned char const* optr, size_t len) {
   return len;
 }
 
-void buffered_output::flush() {
+void buffered_output::push() {
   for (buffer_node const* n = __first; n not_eq __last; n = n->next()) {
     n->dump(__out);
   }
   __last->dump(__out, __last_off);
   __last = __first;
   __last_off = 0;
+}
+
+void buffered_output::flush() {
+  __out.flush();
 }
 
 template <size_t array_size>
