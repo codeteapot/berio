@@ -13,3 +13,5 @@ libberio_la_SOURCES = \
   octet.cxx \
   tagdecode.cxx \
   tagencode.cxx
+  
+CLEANFILES = $(AX_ENABLE_COVERAGE_CLEANFILES)

@@ -17,6 +17,8 @@ class buffered_output : public octet_output {
   
   std::size_t put(unsigned char const* optr, std::size_t len);
   
+  void push();
+  
   void flush();
   
   private:
