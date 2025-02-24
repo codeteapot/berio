@@ -1,0 +1,7 @@
+/*!
+ * \example tag-decode.cxx
+ * \example tag-sizeof.cxx
+ * \example tag-encode.cxx
+ * \example is-eoc.cxx
+ * \example delimin-getn.cxx
+ */
