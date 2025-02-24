@@ -11,14 +11,17 @@ AC_CONFIG_FILES([
   testsuite/Makefile
   testsuite/config/Makefile
   testsuite/lib/Makefile
-  testsuite/lib/dertree/Makefile
-  testsuite/dertree.tests/Makefile
+  testsuite/lib/bertree/Makefile
+  testsuite/bertree.tests/Makefile
 ])
 
 AM_INIT_AUTOMAKE([-Wall -Werror])
 
 AC_PROG_CXX
 AM_PROG_AR
+
+AX_ENABLE_DEBUG([no])
+AX_DEJAGNU([testsuite/global-conf.exp])
 
 LT_INIT
 
@@ -32,12 +35,5 @@ DX_RTF_FEATURE(OFF)
 DX_XML_FEATURE(OFF)
 DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
-
-if test x"$DEJAGNU" = x
-then
-  DEJAGNU="\$(top_srcdir)/testsuite/global-conf.exp"
-fi
-
-AC_SUBST(DEJAGNU)
 
 AC_OUTPUT

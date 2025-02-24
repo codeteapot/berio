@@ -1,0 +1,7 @@
+.PHONY: dist-deb
+
+dist-deb: dist
+        tmpdir=`mktemp` || exit 1
+        ## WIP
+	tar xf $(PACKAGE)-$(VERSION).tar.gz
+	cd $(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc

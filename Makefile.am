@@ -1,4 +1,5 @@
 include $(top_srcdir)/doc/config/doxygen.am
+include $(top_srcdir)/debian.am
 
 pkgconfigdir = $(datadir)/pkgconfig
 
@@ -14,11 +15,13 @@ EXTRADIST = \
   ChangeLog \
   NEWS \
   README \
-  TODO \
-  m4/doxygen.m4
+  TODO
 
 dist_pkgconfig_DATA = \
   berio.pc
 
 README: README.md
-	cat $< > README
+	cat $< >README
+	
+TODO: TODO.md
+	cat $< >TODO
