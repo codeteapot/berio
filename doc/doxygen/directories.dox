@@ -1,0 +1,15 @@
+/*!
+ * \dir berio
+ *
+ * \brief Library directory
+ *
+ * It contains all the library's header files.
+ */
+
+/*!
+ * \dir berio/types
+ *
+ * \brief Header decomposition for all built-in types
+ *
+ * It contains a header file for each built-in type.
+ */

@@ -1,0 +1,108 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking primitive boolean...\n"
+}
+
+# Using 0xff as value
+spawn $bertree_bindir/bertree -s
+
+send "AQEA\r"
+
+expect {
+  "+ BOOLEAN <false>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+# Using 0x01 as value
+spawn $bertree_bindir/bertree -s
+
+send "AQEB\r"
+
+expect {
+  "+ BOOLEAN <true>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "AQH/\r"
+
+expect {
+  "+ BOOLEAN <true>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ BOOLEAN <false>\n\r"
+send "\x04"
+
+expect {
+  "AQEA" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+
+# Using 0xff as value
+spawn $bertree_bindir/bertree -p
+
+send "+ BOOLEAN <true>\n\r"
+send "\x04"
+
+expect {
+  "AQEA" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    xfail "eof print\n"
+  }
+}
+
+# Using 0x01 as value
+spawn $bertree_bindir/bertree -p
+
+send "+ BOOLEAN <true>\n\r"
+send "\x04"
+
+expect {
+  "AQH/" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}

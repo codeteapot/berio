@@ -1,0 +1,27 @@
+/*!
+ * \example tag-decode.cxx
+ *
+ * Demonstrates the use of ber::tag_decode(ber::tag_header&, ber::octet_input&, bool).
+ *
+ * Displays the result of decoding a Base-64 encoded tag header on the standard output. Although it
+ * is known to be correctly encoded, the fact that it is not is taken into account, so that it is
+ * not displayed in such a case.
+ *
+ * \example tag-sizeof.cxx
+ *
+ * TODO DOCUMENTATION ...
+ *
+ * \example tag-encode.cxx
+ *
+ * TODO DOCUMENTATION ...
+ *
+ * \example is-eoc.cxx
+ *
+ * TODO DOCUMENTATION ...
+ *
+ * \example delimin-getn.cxx
+ *
+ * Explains the behavior of ber::delimited_input::getn(unsigned char*, std::size_t).
+ 
+ * TODO DOCUMENTATION ...
+ */

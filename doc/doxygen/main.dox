@@ -1,0 +1,9 @@
+/*!
+ * \mainpage
+ *
+ * Input and output on BER-encoded streams.
+ *
+ * Meets the <a
+ * href="https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.690-201508-S!!PDF-E&type=items"
+ * >ITU-T X.690 specification (08/2015) [PDF]</a>. See section 8, _Basic encoding rules_.
+ */
