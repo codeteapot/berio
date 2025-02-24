@@ -1,0 +1,91 @@
+/*!
+ * \defgroup in-out Input and output
+ *
+ * \brief Input and output interfaces
+ *
+ * Interfaces that determine the input and output operations in the decoding and encoding operations
+ * respectively.
+ */
+
+/*!
+ * \defgroup in-out-delimin Delimited input
+ *
+ * Parent module: \ref in-out
+ *
+ * \ingroup in-out
+ */
+ 
+/*!
+ * \defgroup in-out-base64 Base64
+ *
+ * \ingroup in-out
+ */
+
+/*!
+ * \defgroup in-out-base64-stdlib Standard I/O Library
+ *
+ * \ingroup in-out-base64
+ */
+
+/*!
+ * \defgroup tag-header Tag header
+ *
+ * \brief Types and operations that are applied to the header of a tag
+ *
+ * The header determines the identifier and length of a tag. That is, the part of the tag that does
+ * not include its content.
+ */
+ 
+/*!
+ * \defgroup tag-header-univnums Universal numbers
+ *
+ * \brief ASN.1 definition for universal tag numbers
+ *
+ * \ingroup tag-header
+ */
+
+/*!
+ * \defgroup builtin-types Built-in types
+ */
+
+/*!
+ * \defgroup builtin-types-boolean Boolean
+ *
+ * \ingroup builtin-types
+ */
+
+/*!
+ * \defgroup builtin-types-integer Integer
+ *
+ * \ingroup builtin-types
+ */
+ 
+/*!
+ * \defgroup builtin-types-bitstring Bit string
+ *
+ * \ingroup builtin-types
+ */
+
+/*!
+ * \defgroup builtin-types-octetstring Octet string
+ *
+ * \ingroup builtin-types
+ */
+
+/*!
+ * \defgroup builtin-types-utf8string UTF8 string
+ *
+ * \ingroup builtin-types
+ */
+
+/*!
+ * \defgroup builtin-types-printstring Print string
+ *
+ * \ingroup builtin-types
+ */
+
+/*!
+ * \defgroup builtin-types-oid Object identifier
+ *
+ * \ingroup builtin-types
+ */

@@ -1,0 +1,19 @@
+if { $verbose > 1 } {
+  send_user "Checking tag encode example...\n"
+}
+
+set fp [open "$examples_bindir/tag-encode.out" "w"]
+set out ""
+set out "${out}Result: 3yqBww==\r\n"
+puts -nonewline $fp $out
+close $fp
+
+spawn $examples_bindir/example-tag-encode
+expect {
+  $out {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}
