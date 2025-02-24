@@ -12,6 +12,7 @@ Makefile.in
 *.tar.gz
 
 /README
+/TODO
 /aclocal.m4
 /autom4te.cache/
 /build-aux/
@@ -20,11 +21,15 @@ Makefile.in
 /configure~
 /doc/api/
 /libtool
-/m4/*.m4
+/m4/libtool.m4
+/m4/lt~obsolete.m4
+/m4/ltoptions.m4
+/m4/ltsugar.m4
+/m4/ltversion.m4
 /stage/
 /stamp-h1
 /testsuite/site.exp
-/testsuite/lib/dertree/dertree
+/testsuite/lib/bertree/bertree
 
 !/m4/doxygen.m4
 

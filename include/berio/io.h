@@ -27,6 +27,8 @@ class octet_output {
   virtual bool put(unsigned char o);
   
   virtual std::size_t put(unsigned char const* optr, std::size_t len) = 0;
+  
+  virtual void flush() = 0;
 };
 
 } // end namespace ber

@@ -13,28 +13,24 @@ enum tag_class {
   tc_private = 3
 };
 
-typedef unsigned long tag_number;
+typedef unsigned int tag_number;
 
-struct tag_ident {
+enum tag_shape {
 
-  tag_class tclass;
-  bool constructed;
-  tag_number tnumber;
-  
-  operator bool () const { return tclass not_eq tc_universal or constructed or tnumber not_eq 0; }
-};
-
-struct tag_length {
-
-  std::size_t value;
-  bool definite;
+  ts_primitive,
+  ts_constructed_definite,
+  ts_constructed_indefinite
 };
 
 struct tag_header {
-
-  tag_ident ident;
-  tag_length length;
+  
+  tag_class tclass;
+  tag_number number;
+  tag_shape shape;
+  std::size_t length;
 };
+
+constexpr tag_header th_end = { tc_universal, 0, ts_primitive, 0 };
 
 } // end namespace ber
 
