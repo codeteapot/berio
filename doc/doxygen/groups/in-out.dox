@@ -1,0 +1,12 @@
+/*!
+ * \addtogroup in-out
+ *
+ * \brief Input and output streams
+ *
+ * Minimum contracts of the streams for encoding and decoding tags, and essential implementations
+ * present in the library.
+ *
+ * The type used to store octets is `unsigned char`. The length tolerated by streams is determined
+ * by the maximum value of std::size_t.
+ */
+
