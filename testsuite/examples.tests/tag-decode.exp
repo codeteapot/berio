@@ -1,0 +1,14 @@
+if { $verbose > 1 } {
+  send_user "Checking tag decode example...\n"
+}
+
+spawn $examples_bindir/example-tag-decode
+
+expect {
+  "Class:  0\r\nNumber: 0\r\nShape:  0\r\nLength: 0\r\n" {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}
