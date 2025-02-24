@@ -1,0 +1,5 @@
+Name: @PACKAGE_NAME@
+Description: BER I/O Library
+Version: @PACKAGE_VERSION@
+Cflags: 
+Libs: -lberio

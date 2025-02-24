@@ -1,0 +1,20 @@
+/*!
+ * \addtogroup in-out
+ *
+ * \brief Input and output streams
+ *
+ * Minimum contracts of the streams for encoding and decoding tags, and essential implementations
+ * present in the library.
+ *
+ * The type used to store octets is `unsigned char`.
+ *
+ * \note **Rationale**:
+ * The compiler determines the appropriate intrinsic type for the platform. An octet is considered a
+ * single unsigned character.
+ *
+ * The length tolerated by streams is determined by std::numeric_limits<std::size_t>::max().
+ *
+ * \note **Rationale**: For the sake of octet transmission, it is deliberately expressed as a
+ * limitation that the length of a definite tag is not greater than huge.
+ */
+
