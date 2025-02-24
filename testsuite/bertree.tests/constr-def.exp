@@ -1,0 +1,42 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking single constructed definite...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "4QTBAA==\r"
+
+expect {
+  "+ PRIVATE 1\n" {
+    exp_continue
+  }
+  "+- PRIVATE 1 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 1\n\r"
+send "+- PRIVATE 1 <>\n\r"
+send "\x04"
+
+expect {
+  "4QLBAA==" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}

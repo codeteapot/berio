@@ -1,0 +1,182 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking tag number 32...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "3yAA\r"
+
+expect {
+  "+ PRIVATE 32 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 32 <>\n\r"
+
+expect {
+  "3yAA" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+
+if { $verbose > 1 } {
+  send_user "Cheking tag number 127...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "338A\r"
+
+expect {
+  "+ PRIVATE 127 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 127 <>\n\r"
+
+expect {
+  "338A" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+
+if { $verbose > 1 } {
+  send_user "Cheking tag number 128...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "34EAAA==\r"
+
+expect {
+  "+ PRIVATE 128 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 128 <>\n\r"
+
+expect {
+  "34EAAA==" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+
+if { $verbose > 1 } {
+  send_user "Cheking tag number 255...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "34F/AA==\r"
+
+expect {
+  "+ PRIVATE 255 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 255 <>\n\r"
+
+expect {
+  "34F/AA==" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+
+if { $verbose > 1 } {
+  send_user "Cheking tag number 256...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "34IAAA==\r"
+
+expect {
+  "+ PRIVATE 256 <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 256 <>\n\r"
+
+expect {
+  "34IAAA==" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}
+

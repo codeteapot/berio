@@ -1,0 +1,18 @@
+/*!
+ * \brief Delimitation of input streams
+ *
+ * An essential feature of data transmission using BER/DER is that the tags that compose it can--and
+ * in fact usually do--have a definite length (see ber::tag_header::length). The library natively
+ * implements a wrapper that abstracts the decoders from the availability of octets in a
+ * ber::octet_input based on the tag length.
+ *
+ * \note **Rationale**:
+ * It doesn't make sense to delegate the implementation of this feature to the library client every
+ * time.
+ *
+ * Only implementations of ber::delimited_input::skippable can be wrapped by an input delimiter.
+ * Input stream implementations should take this into account to adhere to this native feature.
+ *
+ * \addtogroup in-out-delimin
+ */
+

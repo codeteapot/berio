@@ -1,0 +1,21 @@
+if { $verbose > 1 } {
+  send_user "Checking get octets of delimited input example...\n"
+}
+
+set fp [open "$examples_bindir/delimin-getn.out" "w"]
+set out ""
+set out "${out}#1: 2a 68 \r\n"
+set out "${out}#2: 0c e1 f1 \r\n"
+set out "${out}#3: 2b \r\n"
+puts -nonewline $fp $out
+close $fp
+
+spawn $examples_bindir/example-delimin-getn.bin
+expect {
+  $out {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}
