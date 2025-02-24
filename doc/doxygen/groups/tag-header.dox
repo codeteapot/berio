@@ -1,0 +1,9 @@
+/*!
+ * \addtogroup tag-header
+ *
+ * \brief Types and operations that are applied to the header of a tag
+ *
+ * The header determines the identifier and length of a tag. That is, the part of the tag that does
+ * not include its content.
+ */
+
