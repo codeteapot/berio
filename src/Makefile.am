@@ -12,4 +12,7 @@ libberio_la_SOURCES = \
   deliminput.cxx \
   octet.cxx \
   tagdecode.cxx \
-  tagencode.cxx
+  tagencode.cxx \
+  tagheader.cxx
+  
+CLEANFILES = $(AX_ENABLE_COVERAGE_CLEANFILES)

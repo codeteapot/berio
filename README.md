@@ -7,6 +7,7 @@
 The build is tested on a Debian "bookworm" with the following packages,
 
 * autoconf
+* autoconf-archive
 * automake1.11
 * pkg-config
 * libtool
@@ -45,13 +46,29 @@ and so on.
 Documentation is ready to be rendered using
 [Doxygen Awesome](https://jothepro.github.io/doxygen-awesome-css/).
 
-Do the following on `doc/config/html/doxygen-awesome-css` directory before generating documentation,
+Do the following on `doc/doxygen-awesome-css` directory before generating documentation,
 
 ```sh
 git submodule update
 ```
 ```sh
 git checkout v2.3.4
+```
+
+### Debugging `bertree`
+
+The package `libtool-bin` must be installed if you are using Debian.
+
+Configure project enabling debug.
+
+```sh
+./configure --prefix=$PWD/stage --enable-debug
+```
+
+Execute debugger.
+
+```sh
+libtool --mode=execute gdb testsuite/lib/bertree/bertree
 ```
 
 ### Trick to remove generated files (Git only)

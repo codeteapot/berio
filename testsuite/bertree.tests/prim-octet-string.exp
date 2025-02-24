@@ -1,0 +1,7 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking primitive octet string...\n"
+}
+
+fail "TODO Tests for primitive octet string"
