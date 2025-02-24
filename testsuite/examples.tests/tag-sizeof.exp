@@ -1,0 +1,19 @@
+if { $verbose > 1 } {
+  send_user "Checking tag sizeof example...\n"
+}
+
+set fp [open "$examples_bindir/tag-sizeof.out" "w"]
+set out ""
+set out "${out}Size: 4\r\n"
+puts -nonewline $fp $out
+close $fp
+
+spawn $examples_bindir/example-tag-sizeof
+expect {
+  $out {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}

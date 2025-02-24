@@ -1,0 +1,38 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking primitive octet string...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "BAQBAv7/\r"
+
+expect {
+  "+ OCTET STRING <01 02 fe ff>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ OCTET STRING <01 02 fe ff>\n\r"
+send "\x04"
+
+expect {
+  "BAQBAv7/" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}

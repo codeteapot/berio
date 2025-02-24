@@ -1,0 +1,22 @@
+if { $verbose > 1 } {
+  send_user "Checking tag decode example...\n"
+}
+
+set fp [open "$examples_bindir/tag-decode.out" "w"]
+set out ""
+set out "${out}Universal: false\r\n"
+set out "${out}Number: 42\r\n"
+set out "${out}Primitive: true\r\n"
+set out "${out}Length: 195\r\n"
+puts -nonewline $fp $out
+close $fp
+
+spawn $examples_bindir/example-tag-decode
+expect {
+  $out {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}

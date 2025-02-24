@@ -1,0 +1,7 @@
+load_lib dejagnu.exp
+
+if { $verbose > 1 } {
+  send_user "Checking tag...\n"
+}
+
+host_execute $unit_bindir/test-tag
