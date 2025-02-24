@@ -1,0 +1,9 @@
+/*!
+ * \addtogroup in-out
+ *
+ * \brief Input and output streams
+ *
+ * Minimum contracts of the streams for encoding and decoding tags, and essential implementations
+ * present in the library.
+ */
+
