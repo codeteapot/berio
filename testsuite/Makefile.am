@@ -1,13 +1,15 @@
 SUBDIRS = \
   config \
   lib \
-  dertree.tests
+  bertree.tests
 	
 EXTRA_DIST = \
   global-conf.exp
 
 AUTOMAKE_OPTIONS = dejagnu
 
-export DEJAGNU
+@AX_DEJAGNU_EXPORT@
 
-DEJATOOL = dertree
+DEJATOOL = bertree
+
+CLEANFILES = $(AX_DEJAGNU_CLEANFILES)

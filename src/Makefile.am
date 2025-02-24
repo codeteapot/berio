@@ -7,9 +7,10 @@ libberio_la_LDFLAGS = \
   -version-info 0:1:0
 
 libberio_la_SOURCES = \
-  b64.cxx \
-  bufoutput.cxx \
   deliminput.cxx \
   octet.cxx \
   tagdecode.cxx \
-  tagencode.cxx
+  tagencode.cxx \
+  tagheader.cxx
+  
+CLEANFILES = $(AX_ENABLE_COVERAGE_CLEANFILES)
