@@ -1,0 +1,9 @@
+/*!
+ * \namespace ber
+ *
+ * \brief BER I/O Library namespace.
+ *
+ * \namespace ber::univ
+ *
+ * \brief Native to ASN.1 definitions.
+ */

@@ -1,5 +1,0 @@
-Name: berio
-Description: BER I/O Library
-Version: 0.1.0
-Cflags: 
-Libs: -lberio
