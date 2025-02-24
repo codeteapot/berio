@@ -1,0 +1,24 @@
+if { $verbose > 1 } {
+  send_user "Checking tag EOC example...\n"
+}
+
+set fp [open "$examples_bindir/is-eoc.out" "w"]
+set out ""
+set out "${out}#1: false\r\n"
+set out "${out}#2: false\r\n"
+set out "${out}#3: false\r\n"
+set out "${out}#4: true\r\n"
+set out "${out}#5: false\r\n"
+set out "${out}#6: true\r\n"
+puts -nonewline $fp $out
+close $fp
+
+spawn $examples_bindir/example-is-eoc.bin
+expect {
+  $out {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}

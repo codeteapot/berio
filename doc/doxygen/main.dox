@@ -1,0 +1,7 @@
+/*!
+ * \mainpage
+ *
+ * Lightweight, native
+ * <a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.690-201508-S!!PDF-E&type=items">
+ * BER/DER (X.690 -- PDF)</a> encoding and decoding in C++.
+ */

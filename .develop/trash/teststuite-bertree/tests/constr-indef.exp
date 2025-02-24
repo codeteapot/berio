@@ -1,0 +1,50 @@
+set timeout 1
+
+if { $verbose > 1 } {
+  send_user "Cheking single constructed indefinite...\n"
+}
+
+spawn $bertree_bindir/bertree -s
+
+send "4YD\r"
+
+expect {
+  "+ PRIVATE 1 *\n" {
+    send "BAA\r"
+    exp_continue
+  }
+  "+- PRIVATE 1 <>" {
+    send "AA\r"
+    exp_continue
+  }
+  "+- EOC <>" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout scan\n"
+  }
+  eof {
+    fail "eof scan\n"
+  }
+}
+
+spawn $bertree_bindir/bertree -p
+
+send "+ PRIVATE 1 *\n\r"
+send "+- PRIVATE 1 <>\n\r"
+
+expect {
+  "4YDBA" {
+    send "+- EOC <>\n\r"
+    exp_continue
+  }
+  "AAA" {
+    pass "pass\n"
+  }
+  timeout {
+    fail "timeout print\n"
+  }
+  eof {
+    fail "eof print\n"
+  }
+}

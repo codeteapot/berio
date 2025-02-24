@@ -1,0 +1,17 @@
+/*!
+ * \brief Traits for the streams of the C++ standard library
+ *
+ * This is the key point regarding interoperability between streams of the
+ * <a href="https://cppreference.net/cpp/io.html" >standard C++ input/output library</a>
+ * and Base64-based octet reading and writing.
+ *
+ * \note
+ * In fact, this is where the motivation to provide support for Base-64 comes from, although keeping
+ * the dependency as optional.
+ *
+ * These streams are character-based. This makes it possible to perform read and write operations on
+ * octets embedded within them.
+ *
+ * \addtogroup in-out-base64-stdlib
+ */
+
