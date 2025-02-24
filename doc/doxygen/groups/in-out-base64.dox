@@ -1,0 +1,25 @@
+/*!
+ * \brief Base-64 support
+ *
+ * It is common to find attached objects in character transmissions using Base-64 as the de facto
+ * encoding standard. This library natively implements a bridge to be supported by octet streams.
+ *
+ * \note
+ * **Example**:
+ * The PEM (Privacy-Enhanced Mail) format, which is often used in cryptography to represent
+ * DER-encoded objects in a character stream.
+ *
+ * In order to represent ASCII printable characters, a maximum of 6 bits are used from each byte to
+ * represent one octet. This means that each octet needs more than one character to be represented.
+ *
+ * \note
+ * **Rationale**:
+ * Unlike binary or hexadecimal, this base is not trivial, yet it is universally adopted. It makes
+ * sense to implement it.
+ *
+ * All types of character streams are tolerated through ber::b64_source_traits and
+ * ber::b64_sink_traits.
+ *
+ * \addtogroup in-out-base64
+ */
+

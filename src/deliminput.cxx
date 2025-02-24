@@ -1,53 +1,65 @@
 #include <algorithm>
+#include <limits>
 
 #include <berio/deliminput.h>
 
 using namespace ber;
 using namespace std;
 
-delimited_input::delimit_sentry::delimit_sentry(delimited_input& in, tag_length const& len):
+delimited_input::sentry::sentry(delimited_input& in, size_t len, bool delim) noexcept:
 __in(in),
-__delim(__in.delimit(len)) {}
+__nr(delim ? __in.narrow(len) : narrow_result{ 0, false }) {}
 
-delimited_input::delimit_sentry::~delimit_sentry() noexcept {
-  __in.delimit(__delim);
+delimited_input::sentry::~sentry() {
+  if (*this) __in.restore(__nr.prev_end);
 }
 
-delimited_input::delimited_input(octet_input& in):
+delimited_input::sentry::operator bool () const noexcept {
+  return __nr.applied;
+}
+
+delimited_input::skippable::~skippable() {}
+
+delimited_input::delimited_input(skippable& in) noexcept:
 __in(in),
 __off(0),
-__delim({0, false}) {}
+__end(numeric_limits<std::size_t>::max()) {}
 
-delimited_input::segment delimited_input::delimit(tag_length const& tlen) {
-  segment const delim = __delim; 
-  if (tlen.definite) {
-    size_t const end = __off + tlen.value;
-    __delim.end = __delim.definite ? min(__delim.end, end) : end;
-    __delim.definite = true;
-  }
-  return delim;
+#ifdef LIBBERIO_UNIT_TESTING_ENABLED
+delimited_input::delimited_input(skippable& in, size_t off, size_t end) noexcept:
+__in(in),
+__off(off),
+__end(end) {}
+#endif
+
+delimited_input::narrow_result delimited_input::narrow(size_t len) noexcept {
+  if (len > __remaining())
+    return { 0, false };
+  size_t const prev_end = __end;
+  __end = __off + len;
+  return { prev_end, true };
 }
 
-void delimited_input::delimit(segment const& delim) {
-  if (__delim.definite)
-    __off += __in.skip(__remaining()); 
-  __delim = delim;
+void delimited_input::restore(size_t prev_end) {
+  __off += __in.skip(__remaining()); 
+  __end = prev_end;
 }
 
-size_t delimited_input::get(unsigned char* optr, size_t len) {
-  size_t avail = __in.get(optr, __available(len));
-  return __off += avail, avail;
+size_t delimited_input::getn(unsigned char* optr, size_t len) {
+  size_t n = __in.getn(optr, min(len, __remaining()));
+  return __off += n, n;
 }
 
-size_t delimited_input::skip(size_t len) {
-  size_t skipped = __in.skip(__available(len));
-  return __off += skipped, skipped;
+#ifdef LIBBERIO_UNIT_TESTING_ENABLED
+size_t delimited_input::current_off() const noexcept {
+  return __off;
 }
 
-size_t delimited_input::__available(size_t len) const {
-  return __delim.definite ? min(len, __remaining()) : len;
+size_t delimited_input::current_end() const noexcept {
+  return __end;
 }
+#endif
 
 size_t delimited_input::__remaining() const {
-  return __off < __delim.end ? __delim.end - __off : 0;
+  return __end - __off;
 }
