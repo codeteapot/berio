@@ -1,5 +1,5 @@
-Name: berio
+Name: @PACKAGE_NAME@
 Description: BER I/O Library
-Version: 0.1.0
+Version: @PACKAGE_VERSION@
 Cflags: 
 Libs: -lberio

@@ -1,5 +1,3 @@
-include $(top_srcdir)/doc/config/doxygen.am
-
 pkgconfigdir = $(datadir)/pkgconfig
 
 ACLOCAL_AMFLAGS = -I m4 --install
@@ -14,11 +12,17 @@ EXTRADIST = \
   ChangeLog \
   NEWS \
   README \
-  TODO \
-  m4/doxygen.m4
+  TODO
 
 dist_pkgconfig_DATA = \
   berio.pc
 
 README: README.md
-	cat $< > README
+	cat $< >README
+	
+TODO: TODO.md
+	cat $< >TODO
+	
+@DX_RULES@
+
+CLEANFILES = $(DX_CLEANFILES)

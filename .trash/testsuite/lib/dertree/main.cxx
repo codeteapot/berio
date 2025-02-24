@@ -2,17 +2,45 @@
 #include <cstring>
 #include <iostream>
 
+#include <berio/deliminput.h>
 #include <berio/b64istream.h>
 #include <berio/b64ostream.h>
 
-#include "derscan.h"
-#include "derprint.h"
+#include "dertree.h"
 
 using namespace std;
 using namespace ber;
 
 bool arg_exist(int, char*[], char const*);
 char const* basename_get(char*);
+
+enum der_scan_result {
+  dsr_remaining,
+  dsr_finished,
+  dsr_failed
+};
+
+template<typename CharT, typename Traits>
+der_scan_result der_scan(delimited_input& in, basic_ostream<CharT, Traits>& os, int level) {
+  der_tree tree(level);
+  tree.scan(in);
+  if (tree.empty())
+    return dsr_finished;
+  os << tree;
+  if (not tree.complete())
+    return dsr_failed;
+  return os.good() ? tree.end() ? dsr_finished : dsr_remaining : dsr_failed;
+}
+
+enum der_print_result {
+  dpr_finished,
+  dpr_failed
+};
+
+template<typename CharT, typename Traits>
+der_print_result der_print(octet_output& out, basic_istream<CharT, Traits>& is, int level) {
+  return dpr_failed;
+}
 
 int main(int argc, char* argv[]) {
   if (arg_exist(argc, argv, "-s")) {
