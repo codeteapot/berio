@@ -2,10 +2,12 @@
 #define BERIO_DELIMINPUT_H
 
 #include <berio/io.h>
-#include <berio/tag.h>
 
 namespace ber {
 
+/*!
+ * \ingroup in-out-delimin
+ */
 class delimited_input : public octet_input {
 
   public:
@@ -19,33 +21,35 @@ class delimited_input : public octet_input {
 
     public:
 
-    delimit_sentry(delimited_input& in, tag_length const& length);
+    delimit_sentry(delimited_input& in, bool definite, std::size_t length);
     ~delimit_sentry() noexcept;
 
     private:
-
+    
     delimited_input& __in;
-    segment const __delim;
+    segment const __delimiter;
   };
 
   delimited_input(octet_input& in);
   
-  segment delimit(tag_length const& length);
+  bool definite() const;
   
-  void delimit(segment const& delim);
+  segment delimit(std::size_t length);
+  
+  void delimit(segment const& delimiter);
   
   std::size_t get(unsigned char* optr, std::size_t len);
   
   std::size_t skip(std::size_t len);
 
   private:
-
+  
   std::size_t __available(std::size_t) const;
   std::size_t __remaining() const;
 
   octet_input& __in;
   std::size_t __off;
-  segment __delim;
+  segment __delimiter;
 };
 
 } // end namespace ber
