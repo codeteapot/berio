@@ -1,4 +1,3 @@
-#include $(top_srcdir)/doc/config/doxygen.am
 include $(top_srcdir)/debian.am
 
 pkgconfigdir = $(datadir)/pkgconfig
@@ -26,3 +25,8 @@ README: README.md
 	
 TODO: TODO.md
 	cat $< >TODO
+	
+.PHONY: doxygen-doc
+
+doxygen-doc:
+	$(MAKE) -C doc doxygen-doc
