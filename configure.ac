@@ -5,6 +5,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
   Makefile
+  doc/Makefile
   include/Makefile
   include/berio/Makefile
   src/Makefile
@@ -25,7 +26,7 @@ AX_DEJAGNU([testsuite/global-conf.exp])
 
 LT_INIT
 
-DX_INIT_DOXYGEN([$PACKAGE_NAME],[doxygen.cfg],[doc/api])
+DX_INIT_DOXYGEN([$PACKAGE_NAME],[doxygen.cfg],[api])
 DX_DOXYGEN_FEATURE(ON)
 DX_HTML_FEATURE(ON)
 DX_CHM_FEATURE(OFF)

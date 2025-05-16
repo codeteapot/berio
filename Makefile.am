@@ -1,4 +1,4 @@
-include $(top_srcdir)/doc/config/doxygen.am
+#include $(top_srcdir)/doc/config/doxygen.am
 include $(top_srcdir)/debian.am
 
 pkgconfigdir = $(datadir)/pkgconfig
@@ -6,6 +6,7 @@ pkgconfigdir = $(datadir)/pkgconfig
 ACLOCAL_AMFLAGS = -I m4 --install
 
 SUBDIRS = \
+  doc \
   include \
   src \
   testsuite
