@@ -55,6 +55,22 @@ git submodule update
 git checkout v2.3.4
 ```
 
+### Debugging `bertree`
+
+The package `libtool-bin` must be installed if you are using Debian.
+
+Configure project enabling debug.
+
+```sh
+./configure --prefix=$PWD/stage --enable-debug
+```
+
+Execute debugger.
+
+```sh
+libtool --mode=execute gdb testsuite/lib/bertree/bertree
+```
+
 ### Trick to remove generated files (Git only)
 
 The following command removes all generated files,

@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
   }
   if (arg_exist(argc, argv, "-p")) {
     ber_print(b64_output(cout), cin);
+    cout << std::endl;
     return EXIT_SUCCESS;
   }
   cout << "Usage: " << basename_get(argv[0]) << " (-s|-p)" << endl;

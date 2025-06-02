@@ -16,10 +16,12 @@ bertree_SOURCES = \
   berlevel.h \
   beroctetstr.h \
   beroid.h \
+  berprint.cxx \
   berprint.h \
   berprintstr.h \
   berscan.h \
   bertree.cxx \
-  main.cxx
+  main.cxx \
+  tokenmatch.h
   
 CLEANFILES = $(AX_ENABLE_COVERAGE_CLEANFILES)
