@@ -132,6 +132,10 @@ void ber_printer::do_extract(std::basic_istream<CharT, Traits>& is) {
   if (not is)
     return;
   ber_label label;
+  if (not (is >> std::ws))
+    return;
+  CharT debug[10];
+  is.getline(debug, 10);
   label.do_extract(is);
   if (not is)
     return;

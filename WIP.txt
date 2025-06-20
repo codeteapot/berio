@@ -1,7 +1,6 @@
 $ libtool --mode=execute gdb testsuite/lib/bertree/bertree
-$ berlabel.h:45
+$ b berprint.h:140
 $ r -p <testsuite/bertree.tests/constr-indef-01.prt.txt
-$ b tokenmatch.h:24
-$ c
+$ p debug
 
 Why "PRIVATE" does not match? 
