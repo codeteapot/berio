@@ -64,7 +64,7 @@ struct ber_printer_content_traits {
 
   static size_t tag_sizeof(ContentT content) { return 0; }
   
-  static void tag_encode(ber::octet_output& out, ContentT content) {}
+  static void tag_encode(ContentT content, ber::octet_output& out) {}
 };
 
 template<typename ContentT>
@@ -87,7 +87,7 @@ class ber_printer_primitive : public ber_printer_node {
   }
   
   void content_print(ber::octet_output& out) const {
-    ber_printer_content_traits<ContentT>::tag_encode(out, __content);
+    ber_printer_content_traits<ContentT>::tag_encode(__content, out);
   }
   
   private:
