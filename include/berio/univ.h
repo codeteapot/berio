@@ -1,6 +1,8 @@
 #ifndef BERIO_UNIV_H
 #define BERIO_UNIV_H
 
+#include <iterator>
+
 #include <berio/io.h>
 #include <berio/tag.h>
 
@@ -87,10 +89,10 @@ struct boolean_traits {
   static void assign(BoolT& b, bool bv) { b = bv; }
 };
 
-template<typename IntT, size_t IntSize = sizeof (IntT)>
+template<typename IntT, std::size_t IntSize = sizeof (IntT)>
 struct integer_traits {
 
-  constexpr static size_t integer_size = IntSize;
+  constexpr static std::size_t integer_size = IntSize;
   
   constexpr static IntT zero() { return {}; }
   
@@ -108,6 +110,12 @@ struct bit_string_traits {
 template<typename OctetStrT>
 struct octet_string_traits {
 
+  static std::size_t size(OctetStrT const& ostr) { return ostr.size(); }
+  
+  static auto begin(OctetStrT const& ostr) -> decltype(std::begin(ostr)) {
+    return std::begin(ostr);
+  }
+  
   static void push_back(OctetStrT& ostr, unsigned char o) { ostr.push_back(o); }
 };
 
@@ -125,12 +133,12 @@ struct print_string_traits {
   static void push_back(PrintStrT& pstr, char c) { pstr.push_back(c); }
 };
 
-template<typename OIDT, typename CompT = unsigned long, size_t CompSize = sizeof (CompT)>
+template<typename OIDT, typename CompT = unsigned long, std::size_t CompSize = sizeof (CompT)>
 struct oid_traits {
 
   typedef CompT comp_type;
   
-  constexpr static size_t comp_size = CompSize;
+  constexpr static std::size_t comp_size = CompSize;
   
   constexpr static CompT comp_zero() { return {}; }
   
@@ -177,7 +185,7 @@ tag_decode_integer_result tag_decode_integer(octet_input& in, IntT& i) {
   if (not in.get(o))
     return tdir_empty;
   Traits::bitor_assign(i, o);
-  size_t size = 0;
+  std::size_t size = 0;
   while (in.get(o)) {
     if (++size > Traits::integer_size)
       return tdir_overflow;
@@ -265,12 +273,12 @@ enum tag_decode_oid_result {
 
 template<typename OIDT, typename Traits = oid_traits<OIDT>>
 tag_decode_oid_result tag_decode_oid(octet_input& in, OIDT& oid) {
-  constexpr size_t comp_bsize = Traits::comp_size * 8;
+  constexpr std::size_t comp_bsize = Traits::comp_size * 8;
   unsigned char o;
   if (not in.get(o))
     return tdoidr_empty;
   typename Traits::comp_type comp = Traits::comp_zero();
-  size_t bsize = 14;
+  std::size_t bsize = 14;
   while (o bitand 0x80) {
     if (bsize > comp_bsize)
       return tdoidr_overflow;
@@ -314,13 +322,23 @@ tag_decode_oid_result tag_decode_oid(octet_input& in, OIDT& oid) {
 }
 
 template<typename BoolT, typename Traits = boolean_traits<BoolT>>
-size_t tag_sizeof_boolean(BoolT b) {
+std::size_t tag_sizeof_boolean(BoolT b) {
   return 1;
 }
 
 template<typename BoolT, typename Traits = boolean_traits<BoolT>>
 void tag_encode_boolean(octet_output& out, BoolT b) {
   out.put(Traits::to_bool(b) ? 0xff : 0x00); // DER restriction X.690 11.1
+}
+
+template<typename OctetStrT, typename Traits = octet_string_traits<OctetStrT>>
+std::size_t tag_sizeof_octet_string(OctetStrT ostr) {
+  return Traits::size(ostr);
+}
+
+template<typename OctetStrT, typename Traits = octet_string_traits<OctetStrT>>
+void tag_encode_octet_string(octet_output& out, OctetStrT ostr) {
+  //std::for_each(Traits::begin(ostr), Traits::end(ostr), [&out](...
 }
 
 } // end namespace ber::univ

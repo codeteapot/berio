@@ -51,11 +51,9 @@ template<typename CharT, typename Traits>
 std::basic_ostream<CharT, Traits>& operator << (
     std::basic_ostream<CharT, Traits>& os,
     ber_print_string const& pstr) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(os);
-  if (sty)
-    std::for_each(pstr.__value.begin(), pstr.__value.end(), [&os](char const& c) {
-      os << c;
-    });
+  typename std::basic_ostream<CharT, Traits>::sentry s(os);
+  if (s)
+    std::for_each(pstr.__value.begin(), pstr.__value.end(), [&os](char const& c) { os << c; });
   return os;
 }
 

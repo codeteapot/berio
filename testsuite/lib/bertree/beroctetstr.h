@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <istream>
+#include <iterator>
 #include <ostream>
 #include <vector>
 
@@ -36,6 +37,8 @@ class ber_octet_string {
 template<>
 struct ber::univ::octet_string_traits<ber_octet_string> {
 
+  static std::size_t size(ber_octet_string const& ostr) { return ostr.__value.size(); }
+  
   static void push_back(ber_octet_string& ostr, unsigned char o) { ostr.__value.push_back(o); }
 };
 
@@ -43,8 +46,8 @@ template<typename CharT, typename Traits>
 std::basic_istream<CharT, Traits>& operator >> (
     std::basic_istream<CharT, Traits>& is,
     ber_octet_string& ostr) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(is);
-  if (sty) {
+  typename std::basic_istream<CharT, Traits>::sentry s(is);
+  if (s) {
     is >> std::hex;
     std::copy(
       std::istream_iterator<unsigned int>(is),
@@ -59,8 +62,8 @@ template<typename CharT, typename Traits>
 std::basic_ostream<CharT, Traits>& operator << (
     std::basic_ostream<CharT, Traits>& os,
     ber_octet_string const& ostr) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(os);
-  if (sty) {
+  typename std::basic_ostream<CharT, Traits>::sentry s(os);
+  if (s) {
     std::string sep = "";
     os << std::hex;
     std::for_each(ostr.__value.begin(), ostr.__value.end(), [&os, &sep](unsigned char const& o) {

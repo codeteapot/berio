@@ -1,5 +1,3 @@
-#include <iostream> // TODO Remove it
-
 #include "berlabel.h"
 #include "berlevel.h"
 

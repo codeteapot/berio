@@ -48,8 +48,8 @@ template<typename CharT, typename Traits>
 std::basic_ostream<CharT, Traits>& operator << (
     std::basic_ostream<CharT, Traits>& os,
     ber_boolean const& b) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(os);
-  if (sty)
+  typename std::basic_ostream<CharT, Traits>::sentry s(os);
+  if (s)
     os << std::boolalpha << b.__value;
   return os;
 }

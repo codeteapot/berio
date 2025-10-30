@@ -50,8 +50,8 @@ template<typename CharT, typename Traits>
 std::basic_ostream<CharT, Traits>& operator << (
     std::basic_ostream<CharT, Traits>& os,
     ber_bit_string const& bstr) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(os);
-  if (sty) {
+  typename std::basic_ostream<CharT, Traits>::sentry s(os);
+  if (s) {
     os << std::noboolalpha;
     std::string sep = "";
     std::for_each(bstr.__value.begin(), bstr.__value.end(), [&os, &sep](bool const& b) {

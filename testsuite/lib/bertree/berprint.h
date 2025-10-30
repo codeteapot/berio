@@ -9,7 +9,7 @@
 #include <berio/io.h>
 #include <berio/tag.h>
 
-#include "berbitstr.h"
+#include "beroctetstr.h"
 #include "bercontent.h"
 #include "berlabel.h"
 #include "berlevel.h"
@@ -58,9 +58,21 @@ class ber_printer {
 template<typename ContentT>
 struct ber_printer_content_traits {
 
-  static size_t tag_sizeof(ContentT content) { return 0; }
+  static size_t tag_sizeof(ContentT const& content) { return 0; }
   
-  static void tag_encode(ContentT content, ber::octet_output& out) {}
+  static void tag_encode(ContentT const& content, ber::octet_output& out) {}
+};
+
+template<>
+struct ber_printer_content_traits<ber_octet_string> {
+
+  static size_t tag_sizeof(ber_octet_string const& ostr) {
+    return ber::univ::tag_sizeof_octet_string(ostr);
+  }
+  
+  static void tag_encode(ber_octet_string const& ostr, ber::octet_output& out) {
+    ber::univ::tag_encode_octet_string(out, ostr);
+  }
 };
 
 template<typename ContentT>
@@ -232,9 +244,9 @@ template<typename CharT, typename Traits>
 ber_printer_node* ber_print_octet_string(
     ber_label const& label,
     std::basic_istream<CharT, Traits>& is) {
-  ber_bit_string bit_str;
-  is >> bit_str;
-  return new ber_printer_primitive(label.tclass(), label.number(), bit_str);
+  ber_octet_string ostr;
+  //is >> ostr; // TODO Next. Not working...
+  return new ber_printer_primitive(label.tclass(), label.number(), ostr);
 }
 
 #endif // BERTREE_BERPRINT_H

@@ -67,8 +67,8 @@ template<typename CharT, typename Traits>
 std::basic_ostream<CharT, Traits>& operator << (
     std::basic_ostream<CharT, Traits>& os,
     ber_oid const& oid) {
-  typename std::basic_ostream<CharT, Traits>::sentry const sty(os);
-  if (sty) {
+  typename std::basic_ostream<CharT, Traits>::sentry s(os);
+  if (s) {
     std::string sep = "";
     std::for_each(oid.__value.begin(), oid.__value.end(), [&os, &sep](long const& i) {
       os << sep << i;
