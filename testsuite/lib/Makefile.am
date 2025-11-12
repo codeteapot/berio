@@ -1,5 +1,9 @@
 SUBDIRS = \
-  bertree
+  unit \
+  bertree \
+  examples
 
 EXTRA_DIST = \
-  bertree.exp
+  unit.exp \
+  bertree.exp \
+  examples.exp

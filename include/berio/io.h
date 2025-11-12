@@ -5,6 +5,9 @@
 
 namespace ber {
 
+/*!
+ * \ingroup in-out
+ */
 class octet_input {
 
   public:
@@ -18,6 +21,9 @@ class octet_input {
   virtual std::size_t skip(std::size_t len) = 0;
 };
 
+/*!
+ * \ingroup in-out
+ */
 class octet_output {
 
   public:

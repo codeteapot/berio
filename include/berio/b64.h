@@ -7,6 +7,9 @@
 
 namespace ber {
 
+/*!
+ * \ingroup in-out-base64
+ */
 template<typename SourceT>
 struct b64_source_traits {
 
@@ -15,6 +18,9 @@ struct b64_source_traits {
   static void ignore(SourceT& src) {}
 };
 
+/*!
+ * \ingroup in-out-base64
+ */
 template<typename SinkT>
 struct b64_sink_traits {
 
@@ -23,6 +29,9 @@ struct b64_sink_traits {
   static void flush(SinkT& sink) {}
 };
 
+/*!
+ * \ingroup in-out-base64
+ */
 template<typename SourceT, typename Traits = b64_source_traits<SourceT>>
 class b64_input : public octet_input {
 
@@ -166,6 +175,9 @@ class b64_input : public octet_input {
   }
 };
 
+/*!
+ * \ingroup in-out-base64
+ */
 template<typename SinkT, typename Traits = b64_sink_traits<SinkT>>
 class b64_output : public octet_output {
 

@@ -1,0 +1,11 @@
+if { $verbose > 1 } {
+  send_user "Checking tag decode example...\n"
+}
+
+spawn $examples_bindir/example-tag-decode
+
+expect {
+  "" {
+    pass "pass\n"
+  }
+}

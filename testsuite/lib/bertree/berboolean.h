@@ -4,7 +4,7 @@
 #include <istream>
 #include <ostream>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_boolean {
 
@@ -28,11 +28,11 @@ class ber_boolean {
   bool __value;
   
   template<typename>
-  friend struct ber::univ::boolean_traits;
+  friend struct ber::boolean_traits;
 };
 
 template<>
-struct ber::univ::boolean_traits<ber_boolean> {
+struct ber::boolean_traits<ber_boolean> {
 
   static bool to_bool(ber_boolean const& b) { return b.__value; }
   

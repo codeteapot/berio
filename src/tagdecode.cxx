@@ -1,6 +1,6 @@
 #include <cstddef>
 
-#include <berio/encoding.h>
+#include <berio/tag.h>
 
 using namespace ber;
 using namespace std; // std::size_t

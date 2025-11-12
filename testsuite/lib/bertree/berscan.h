@@ -5,7 +5,7 @@
 #include <ostream>
 
 #include <berio/deliminput.h>
-#include <berio/encoding.h>
+#include <berio/tag.h>
 
 #include "berbitstr.h"
 #include "berboolean.h"
@@ -147,12 +147,12 @@ ber_scan_result ber_scan(
 template<typename CharT, typename Traits>
 void ber_scan_boolean(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_boolean b;
-  ber::univ::tag_decode_boolean_result tdbr = ber::univ::tag_decode_boolean(in, b);
-  if (tdbr == ber::univ::tdbr_complete)
+  ber::tag_decode_boolean_result tdbr = ber::tag_decode_boolean(b, in);
+  if (tdbr == ber::tdbr_complete)
     os << b;
   else {
     os << '!';
-    if (tdbr == ber::univ::tdbr_empty)
+    if (tdbr == ber::tdbr_empty)
       os << "empty";
     else
       os << "unknown";
@@ -162,14 +162,14 @@ void ber_scan_boolean(ber::delimited_input& in, std::basic_ostream<CharT, Traits
 template<typename CharT, typename Traits>
 void ber_scan_integer(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_integer i;
-  ber::univ::tag_decode_integer_result tdir = ber::univ::tag_decode_integer(in, i);
-  if (tdir == ber::univ::tdir_complete)
+  ber::tag_decode_integer_result tdir = ber::tag_decode_integer(in, i);
+  if (tdir == ber::tdir_complete)
     os << i;
   else {
     os << '!';
-    if (tdir == ber::univ::tdir_empty)
+    if (tdir == ber::tdir_empty)
       os << "empty";
-    else if (tdir == ber::univ::tdir_overflow)
+    else if (tdir == ber::tdir_overflow)
       os << "overflow";
     else
       os << "unknown";
@@ -179,7 +179,7 @@ void ber_scan_integer(ber::delimited_input& in, std::basic_ostream<CharT, Traits
 template<typename CharT, typename Traits>
 void ber_scan_bit_string(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_bit_string bstr;
-  ber::univ::tag_decode_bit_string(in, bstr);
+  ber::tag_decode_bit_string(in, bstr);
   os << bstr;
 }
 
@@ -191,16 +191,16 @@ void ber_scan_utf8_string(ber::delimited_input& in, std::basic_ostream<CharT, Tr
 template<typename CharT, typename Traits>
 void ber_scan_oid(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_oid oid;
-  ber::univ::tag_decode_oid_result tdoidr = ber::univ::tag_decode_oid(in, oid);
-  if (tdoidr == ber::univ::tdoidr_complete)
+  ber::tag_decode_oid_result tdoidr = ber::tag_decode_oid(in, oid);
+  if (tdoidr == ber::tdoidr_complete)
     os << oid;
   else {
     os << '!';
-    if (tdoidr == ber::univ::tdoidr_empty)
+    if (tdoidr == ber::tdoidr_empty)
       os << "empty";
-    else if (tdoidr == ber::univ::tdoidr_incomplete)
+    else if (tdoidr == ber::tdoidr_incomplete)
       os << "incomplete";
-    else if (tdoidr == ber::univ::tdoidr_overflow)
+    else if (tdoidr == ber::tdoidr_overflow)
       os << "overflow";
     else
       os << "unknown";
@@ -210,14 +210,14 @@ void ber_scan_oid(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& o
 template<typename CharT, typename Traits>
 void ber_scan_print_string(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_print_string pstr;
-  ber::univ::tag_decode_print_string(in, pstr);
+  ber::tag_decode_print_string(in, pstr);
   os << pstr;
 }
 
 template<typename CharT, typename Traits>
 void ber_scan_octet_string(ber::delimited_input& in, std::basic_ostream<CharT, Traits>& os) {
   ber_octet_string ostr;
-  ber::univ::tag_decode_octet_string(in, ostr);
+  ber::tag_decode_octet_string(in, ostr);
   os << ostr;
 }
 

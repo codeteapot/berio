@@ -5,6 +5,9 @@
 
 namespace ber {
 
+/*!
+ * \ingroup in-out-delimin
+ */
 class delimited_input : public octet_input {
 
   public:

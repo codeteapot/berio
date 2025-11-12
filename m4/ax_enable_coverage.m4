@@ -18,7 +18,7 @@ coverage-init:
 	lcov --directory . --zerocounters
 
 coverage.info: coverage-init check
-	lcov --directory . --capture --output-file coverage.info
+	lcov --rc geninfo_all_blocks=1 --directory . --capture --output-file coverage.info
 	lcov --remove coverage.info \$(AX_ENABLE_COVERAGE_REMOVEFILES) --output-file coverage.info
 	
 coverage-report: coverage.info

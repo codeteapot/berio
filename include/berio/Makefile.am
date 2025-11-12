@@ -5,7 +5,7 @@ includeberio_HEADERS = \
   b64istream.h \
   b64ostream.h \
   deliminput.h \
-  encoding.h \
   io.h \
   tag.h \
+  types.h \
   univ.h
