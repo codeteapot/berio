@@ -5,8 +5,6 @@
 #include <stdexcept>
 #include <vector>
 
-#include <berio/encoding.h>
-#include <berio/io.h>
 #include <berio/tag.h>
 
 #include "berboolean.h"
@@ -175,11 +173,11 @@ struct ber_printer_boolean_policy {
   using content_type = ber_boolean;
   
   static std::size_t content_sizeof(ber_boolean const& b) {
-    return ber::univ::tag_sizeof_boolean(b);
+    return ber::tag_sizeof_boolean(b);
   }
   
   static void content_encode(ber::octet_output& out, ber_boolean const& b) {
-    ber::univ::tag_encode_boolean(out, b);
+    ber::tag_encode_boolean(out, b);
   }
 };
 
@@ -188,11 +186,11 @@ struct ber_printer_octet_string_policy {
   using content_type = ber_octet_string;
   
   static std::size_t content_sizeof(ber_octet_string const& ostr) {
-    return ber::univ::tag_sizeof_octet_string(ostr);
+    return ber::tag_sizeof_octet_string(ostr);
   }
   
   static void content_encode(ber::octet_output& out, ber_octet_string const& ostr) {
-    ber::univ::tag_encode_octet_string(out, ostr);
+    ber::tag_encode_octet_string(out, ostr);
   }
 };
 

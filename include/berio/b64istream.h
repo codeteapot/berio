@@ -8,6 +8,9 @@
 
 namespace ber {
 
+/*!
+ * \ingroup in-out-base64-stdlib
+ */
 template<typename CharT, typename Traits>
 struct b64_source_traits<std::basic_istream<CharT, Traits>> {
 

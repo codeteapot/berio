@@ -7,6 +7,9 @@
 
 namespace ber {
 
+/*!
+ * \ingroup in-out-base64-stdlib
+ */
 template<typename CharT, typename Traits>
 struct b64_sink_traits<std::basic_ostream<CharT, Traits>> {
 

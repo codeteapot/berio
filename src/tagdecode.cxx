@@ -1,6 +1,6 @@
 #include <cstddef>
 
-#include <berio/encoding.h>
+#include <berio/tag.h>
 
 using namespace ber;
 using namespace std; // std::size_t
@@ -27,11 +27,13 @@ tag_decode_result ber::tag_decode(tag_header& th, octet_input& in) {
       if (not in.get(o))
         return tdr_number_incomplete;
       int curr = o bitand 0x7f;
+      // First should be non-zero: X.690-202101 8.1.2.4.2.c
       if (tag_number_max - th.number < curr)
         return tdr_number_overflow;
       th.number = (th.number << 7) + curr;
     }
     while (o bitand 0x80);
+    // Resulting number should be > 30
   }
   
   if (not in.get(o))
@@ -40,10 +42,11 @@ tag_decode_result ber::tag_decode(tag_header& th, octet_input& in) {
     return tdr_length_unsupported; // X.690-0207 8.1.3.5.c
   
   // Length. Indefinite
-  if (o == 0x80)
-    return constr
-      ? th.shape = ts_constructed_indefinite, th.length = 0, tdr_complete
-      : tdr_indefinite_primitive;
+  if (o == 0x80) {
+    if (not constr)
+      return tdr_indefinite_primitive;
+    return th.shape = ts_constructed_indefinite, th.length = 0, tdr_complete;
+  }
   
   th.shape = constr ? ts_constructed_definite : ts_primitive;
   

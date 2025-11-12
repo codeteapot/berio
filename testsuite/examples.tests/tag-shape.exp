@@ -1,0 +1,17 @@
+if { $verbose > 1 } {
+  send_user "Checking tag shape example...\n"
+}
+
+spawn $examples_bindir/example-tag-shape
+
+expect {
+  "Constructed: true" {
+    exp_continue
+  }
+  "Definite: true" {
+    pass "pass\n"
+  }
+  eof {
+    fail "Unexepected output"
+  }
+}

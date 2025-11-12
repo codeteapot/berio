@@ -13,8 +13,12 @@ AC_CONFIG_FILES([
   testsuite/Makefile
   testsuite/config/Makefile
   testsuite/lib/Makefile
+  testsuite/lib/unit/Makefile
   testsuite/lib/bertree/Makefile
+  testsuite/lib/examples/Makefile
+  testsuite/unit.tests/Makefile
   testsuite/bertree.tests/Makefile
+  testsuite/examples.tests/Makefile
 ])
 
 AM_INIT_AUTOMAKE([-Wall -Werror])

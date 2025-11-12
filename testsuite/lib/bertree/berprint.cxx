@@ -41,7 +41,7 @@ __th(th) {}
 ber_printer_node::~ber_printer_node() {}
 
 bool ber_printer_node::end() const {
-  return __th == th_end;
+  return is_eoc(__th);
 }
 
 void ber_printer_node::print(octet_output& out) const {

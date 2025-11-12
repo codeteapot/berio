@@ -7,7 +7,7 @@
 #include <ostream>
 #include <vector>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_bit_string {
 
@@ -20,7 +20,7 @@ class ber_bit_string {
   std::vector<bool> __value;
   
   template<typename>
-  friend struct ber::univ::bit_string_traits;
+  friend struct ber::bit_string_traits;
   
   template<typename CharT, typename Traits>
   friend std::basic_istream<CharT, Traits>& operator >> (
@@ -34,7 +34,7 @@ class ber_bit_string {
 };
 
 template<>
-struct ber::univ::bit_string_traits<ber_bit_string> {
+struct ber::bit_string_traits<ber_bit_string> {
 
   static void push_back(ber_bit_string& bstr, bool b) { bstr.__value.push_back(b); }
 };
