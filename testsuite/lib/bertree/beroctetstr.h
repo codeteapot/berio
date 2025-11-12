@@ -8,7 +8,7 @@
 #include <ostream>
 #include <vector>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_octet_string {
 
@@ -44,11 +44,11 @@ class ber_octet_string {
   std::vector<unsigned char> __value;
   
   template<typename>
-  friend struct ber::univ::octet_string_traits;
+  friend struct ber::octet_string_traits;
 };
 
 template<>
-struct ber::univ::octet_string_traits<ber_octet_string> {
+struct ber::octet_string_traits<ber_octet_string> {
 
   using container_type = std::vector<unsigned char>;
   using size_type = typename container_type::size_type;

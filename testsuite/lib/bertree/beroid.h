@@ -6,7 +6,7 @@
 #include <ostream>
 #include <vector>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_oid {
 
@@ -19,7 +19,7 @@ class ber_oid {
   std::vector<int> __value;
   
   template<typename>
-  friend struct ber::univ::oid_traits;
+  friend struct ber::oid_traits;
   
   template<typename CharT, typename Traits>
   friend std::basic_istream<CharT, Traits>& operator >> (
@@ -33,7 +33,7 @@ class ber_oid {
 };
 
 template<>
-struct ber::univ::oid_traits<ber_oid> {
+struct ber::oid_traits<ber_oid> {
 
   typedef unsigned long comp_type;
   

@@ -4,7 +4,7 @@
 #include <istream>
 #include <ostream>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_integer {
 
@@ -18,7 +18,7 @@ class ber_integer {
   int __value;
   
   template<typename>
-  friend struct ber::univ::integer_traits;
+  friend struct ber::integer_traits;
   
   template<typename CharT, typename Traits>
   friend std::basic_istream<CharT, Traits>& operator >> (
@@ -32,7 +32,7 @@ class ber_integer {
 };
 
 template<>
-struct ber::univ::integer_traits<ber_integer> {
+struct ber::integer_traits<ber_integer> {
 
   constexpr static size_t integer_size = sizeof (int);
   
