@@ -6,7 +6,7 @@
 #include <ostream>
 #include <vector>
 
-#include <berio/univ.h>
+#include <berio/types.h>
 
 class ber_print_string {
 
@@ -19,7 +19,7 @@ class ber_print_string {
   std::vector<char> __value;
   
   template<typename>
-  friend struct ber::univ::print_string_traits;
+  friend struct ber::print_string_traits;
   
   template<typename CharT, typename Traits>
   friend std::basic_istream<CharT, Traits>& operator >> (
@@ -33,7 +33,7 @@ class ber_print_string {
 };
 
 template<>
-struct ber::univ::print_string_traits<ber_print_string> {
+struct ber::print_string_traits<ber_print_string> {
 
   static char to_char(unsigned char o) { return static_cast<char>(o); }
   
