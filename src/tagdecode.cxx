@@ -5,7 +5,7 @@
 using namespace ber;
 using namespace std; // std::size_t
 
-tag_decode_result ber::tag_decode(tag_header& th, octet_input& in) {
+tag_decode_result ber::tag_decode(tag_header& th, octet_input& in, bool strict) {
   th = { tc_universal, 0, ts_primitive, 0 };
   
   unsigned char o = 0;
@@ -27,13 +27,15 @@ tag_decode_result ber::tag_decode(tag_header& th, octet_input& in) {
       if (not in.get(o))
         return tdr_number_incomplete;
       int curr = o bitand 0x7f;
-      // First should be non-zero: X.690-202101 8.1.2.4.2.c
+      // TODO First should be non-zero: X.690-202101 8.1.2.4.2.c
+      // Strict => Malformed: tdr_number_zero_leading
       if (tag_number_max - th.number < curr)
         return tdr_number_overflow;
       th.number = (th.number << 7) + curr;
     }
     while (o bitand 0x80);
-    // Resulting number should be > 30
+    // TODO Resulting number should be > 30
+    // Strict => Malformed: tdr_number_invalid_high
   }
   
   if (not in.get(o))

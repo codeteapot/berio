@@ -16,32 +16,28 @@ enum tag_class {
 
   /*!
    * \brief Tag class: UNIVERSAL
-   *
-   * It has the value 0.
    */
   tc_universal = 0,
   
   /*!
    * \brief Tag class: APPLICATION
-   *
-   * It has the value 1.
    */
   tc_application = 1,
   
   /*!
    * \brief Tag class: CONTEXT SPECIFIC
-   *
-   * It has the value 2.
    */
   tc_context_specific = 2,
   
   /*!
    * \brief Tag class: PRIVATE
-   *
-   * It has the value 3.
    */
   tc_private = 3
 };
+/*!
+ * \enum ber::tag_class
+ * \hideenumvalues
+ */
 
 /*!
  * \brief Type used to store a tag number
@@ -175,6 +171,20 @@ enum tag_decode_result {
   
   /*!
    * \brief TODO Documentation
+   *
+   * Malformed: Only if strict
+   */
+  tdr_number_zero_leading,
+  
+  /*!
+   * \brief TODO Documentation
+   *
+   * Malformed: Only if strict
+   */
+  tdr_number_invalid_high,
+  
+  /*!
+   * \brief TODO Documentation
    */
   tdr_length_undefined,
   
@@ -205,7 +215,7 @@ enum tag_decode_result {
  *
  * \ingroup tag-header
  */
-tag_decode_result tag_decode(tag_header& th, octet_input& in);
+tag_decode_result tag_decode(tag_header& th, octet_input& in, bool strict = true);
 
 /*!
  * \ingroup tag-header

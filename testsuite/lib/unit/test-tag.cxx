@@ -7,38 +7,6 @@
 
 using namespace ber;
 
-void test_class_universal(TestState& test) {
-  if (tc_universal not_eq 0) {
-    test.fail("Class UNIVERSAL: Bad enum value");
-    return;
-  }
-  test.pass("Class UNIVERSAL: Passed");
-}
-
-void test_class_application(TestState& test) {
-  if (tc_application not_eq 1) {
-    test.fail("Class APPLICATION: Bad enum value");
-    return;
-  }
-  test.pass("Class APPLICATION: Passed");
-}
-
-void test_class_context_specific(TestState& test) {
-  if (tc_context_specific not_eq 2) {
-    test.fail("Class CONTEXT SPECIFIC: Bad enum value");
-    return;
-  }
-  test.pass("Class CONTEXT SPECIFIC: Passed");
-}
-
-void test_class_private(TestState& test) {
-  if (tc_private not_eq 3) {
-    test.fail("Class PRIVATE: Bad enum value");
-    return;
-  }
-  test.pass("Class PRIVATE: Passed");
-}
-
 void test_decode_class_universal(TestState& test) {
   array_octet_input in({ 0b00000000, 0b00000000 });
   
@@ -300,11 +268,6 @@ void test_encode_class_private(TestState& test) {
 
 int main() {
   TestState test;
-  
-  test_class_universal(test);
-  test_class_application(test);
-  test_class_context_specific(test);
-  test_class_private(test);
   
   test_decode_class_universal(test);
   test_decode_class_application(test);
